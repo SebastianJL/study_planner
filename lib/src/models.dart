@@ -6,6 +6,8 @@ class StudyPlan {
   String subject;
   DateTime examDate;
 
+  StudyPlan({@required this.subject, @required this.examDate});
+
   Future<bool> save() async {
     // todo: add firebase backend.
     print('saving study plan for $subject on $examDate using a web service');
@@ -33,5 +35,4 @@ class LearningGoal {
     return Future.delayed(
         Duration(seconds: 2), () => [true, false][Random().nextInt(2)]);
   }
-
 }
