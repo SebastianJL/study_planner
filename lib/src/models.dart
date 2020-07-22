@@ -7,6 +7,11 @@ class StudyPlan {
   DateTime examDate;
 
   StudyPlan({@required this.subject, @required this.examDate});
+  StudyPlan.empty();
+
+  String toString() {
+    return '<$subject ($examDate)>';
+  }
 
   Future<bool> save() async {
     // todo: add firebase backend.

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:study_planer/src/blocs/study_plans_bloc.dart';
 import 'package:study_planer/src/forms.dart';
+import 'package:study_planer/src/models.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key key}) : super(key: key);
@@ -16,8 +19,24 @@ class HomePage extends StatelessWidget {
         ),
         title: Text(title),
       ),
-      body: Center(
-        child: Text('No study plans yet. Press "+" to create.'),
+      body: Container(
+        padding: EdgeInsets.all(8),
+        child: BlocBuilder(
+          cubit: BlocProvider.of<StudyPlansBloc>(context),
+          builder: (BuildContext context, StudyPlansState state) {
+            if (state is StudyPlansInitial) {
+              return _buildEmpty();
+            } else if (state is StudyPlansEmpty) {
+              return _buildEmpty();
+            } else if (state is StudyPlansLoading) {
+              return _buildLoading();
+            } else if (state is StudyPlansLoaded) {
+              return _buildStudyPlanListView(state.studyPlans);
+            } else {
+              return _buildErrorPage(state);
+            }
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -29,6 +48,22 @@ class HomePage extends StatelessWidget {
         child: Icon(Icons.add),
       ),
     );
+  }
+
+  Widget _buildEmpty() {
+    return Center(child: Text('No study plans yet. Press "+" to create.'));
+  }
+
+  Widget _buildLoading() {
+    return Center(child: CircularProgressIndicator());
+  }
+
+  Widget _buildStudyPlanListView(List<StudyPlan> studyPlans) {
+    return Center(child: Text('$studyPlans'));
+  }
+
+  Widget _buildErrorPage(StudyPlansState state) {
+    return Center(child: Text("ERROR. Couldn't handle state $state."));
   }
 }
 

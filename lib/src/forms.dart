@@ -15,7 +15,7 @@ class AddStudyPlanFormState extends State<AddStudyPlanForm> {
   // Note: This is a `GlobalKey<FormState>`,
   // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
-  StudyPlan _newStudyPlan = StudyPlan();
+  StudyPlan _newStudyPlan = StudyPlan.empty();
 
   @override
   Widget build(BuildContext context) {
