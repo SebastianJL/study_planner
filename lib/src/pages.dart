@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
             } else if (state is StudyPlansLoaded) {
               return _buildStudyPlanListView(state.studyPlans);
             } else {
-              return _buildErrorPage(state);
+              return _buildErrorNoSuchState(state);
             }
           },
         ),
@@ -58,11 +58,21 @@ class HomePage extends StatelessWidget {
     return Center(child: CircularProgressIndicator());
   }
 
-  Widget _buildStudyPlanListView(List<StudyPlan> studyPlans) {
-    return Center(child: Text('$studyPlans'));
+  Widget _buildStudyPlanListView(Stream<List<StudyPlan>> studyPlans) {
+    return StreamBuilder(
+      stream: studyPlans,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.hasData) {
+          return Center(child: Text('${snapshot.data}'));
+        }
+        else {
+          return _buildLoading();
+        }
+      },
+    );
   }
 
-  Widget _buildErrorPage(StudyPlansState state) {
+  Widget _buildErrorNoSuchState(StudyPlansState state) {
     return Center(child: Text("ERROR. Couldn't handle state $state."));
   }
 }

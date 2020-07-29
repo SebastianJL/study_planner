@@ -11,8 +11,9 @@ part 'study_plans_state.dart';
 
 class StudyPlansBloc extends Bloc<StudyPlansEvent, StudyPlansState> {
   var _studyPlans = [
-//    StudyPlan(examDate: DateTime.now(), subject: 'Maths'),
-//    StudyPlan(examDate: DateTime.now(), subject: 'Biology'),
+    StudyPlan(examDate: DateTime.now(), subject: 'Maths'),
+    StudyPlan(examDate: DateTime.now(), subject: 'Biology'),
+//    StudyPlan(examDate: DateTime.now(), subject: 'Geography'),
   ];
 
   StudyPlansBloc() : super(StudyPlansInitial()) {
@@ -28,7 +29,10 @@ class StudyPlansBloc extends Bloc<StudyPlansEvent, StudyPlansState> {
       if (_studyPlans.isEmpty) {
         yield StudyPlansEmpty();
       } else {
-        yield StudyPlansLoaded(studyPlans: _studyPlans);
+        yield StudyPlansLoaded(
+          studyPlans: Stream<List<StudyPlan>>.periodic(
+              Duration(seconds: 1), (_) => _studyPlans),
+        );
       }
     }
   }
