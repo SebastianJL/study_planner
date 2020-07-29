@@ -38,8 +38,8 @@ class AddStudyPlanFormState extends State<AddStudyPlanForm> {
           Text('Date of exam'),
           InputDatePickerFormField(
             initialDate: DateTime.now(),
-            firstDate: DateTime.parse("2020-07-20"),
-            lastDate: DateTime.parse("2020-07-27"),
+            firstDate: DateTime(2000),
+            lastDate: DateTime.now().add(Duration(days: 2*365)),
             onDateSaved: (value) => _newStudyPlan.examDate = value,
           ),
           RaisedButton(
