@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:study_planer/src/blocs/study_plans_bloc.dart';
-import 'package:study_planer/src/forms.dart';
 import 'package:study_planer/src/models.dart';
 
 class HomePage extends StatelessWidget {
@@ -77,18 +76,3 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class AddStudyPlanPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.close),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        title: Text('New study plan'),
-      ),
-      body: AddStudyPlanForm(),
-    );
-  }
-}
