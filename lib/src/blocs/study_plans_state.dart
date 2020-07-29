@@ -4,11 +4,6 @@ abstract class StudyPlansState extends Equatable {
   const StudyPlansState();
 }
 
-class StudyPlansInitial extends StudyPlansState {
-  @override
-  List<Object> get props => throw UnimplementedError();
-}
-
 class StudyPlansEmpty extends StudyPlansState {
   @override
   List<Object> get props => throw UnimplementedError();

@@ -23,9 +23,7 @@ class HomePage extends StatelessWidget {
         child: BlocBuilder(
           cubit: BlocProvider.of<StudyPlansBloc>(context),
           builder: (BuildContext context, StudyPlansState state) {
-            if (state is StudyPlansInitial) {
-              return _buildEmpty();
-            } else if (state is StudyPlansEmpty) {
+            if (state is StudyPlansEmpty) {
               return _buildEmpty();
             } else if (state is StudyPlansLoading) {
               return _buildLoading();

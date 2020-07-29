@@ -16,7 +16,7 @@ class StudyPlansBloc extends Bloc<StudyPlansEvent, StudyPlansState> {
 //    StudyPlan(examDate: DateTime.now(), subject: 'Geography'),
   ];
 
-  StudyPlansBloc() : super(StudyPlansInitial()) {
+  StudyPlansBloc() : super(StudyPlansEmpty()) {
     this.add(GetStudyPlans());
   }
 
