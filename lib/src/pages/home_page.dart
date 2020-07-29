@@ -62,9 +62,8 @@ class HomePage extends StatelessWidget {
       stream: studyPlans,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
-          return Center(child: Text('${snapshot.data}'));
-        }
-        else {
+          return StudyPlanListView(snapshot.data);
+        } else {
           return _buildLoading();
         }
       },
@@ -76,3 +75,25 @@ class HomePage extends StatelessWidget {
   }
 }
 
+class StudyPlanListView extends StatelessWidget {
+  final List<StudyPlan> data;
+
+  StudyPlanListView(this.data);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      itemCount: data.length,
+      separatorBuilder: (context, index) => Divider(
+        color: Colors.black,
+      ),
+      itemBuilder: (BuildContext context, int index) {
+        var studyPlan = data[index];
+        return ListTile(
+          title: Text('${studyPlan.subject}'),
+          subtitle: Text('exam date: ${studyPlan.examDate}'),
+        );
+      },
+    );
+  }
+}
