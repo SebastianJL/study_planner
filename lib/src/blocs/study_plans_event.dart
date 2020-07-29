@@ -1,10 +1,7 @@
 part of 'study_plans_bloc.dart';
 
-abstract class StudyPlansEvent extends Equatable {
+abstract class StudyPlansEvent {
   const StudyPlansEvent();
 }
 
-class GetStudyPlans extends StudyPlansEvent {
-  @override
-  List<Object> get props => [];
-}
+class GetStudyPlans extends StudyPlansEvent {}

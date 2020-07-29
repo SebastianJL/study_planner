@@ -1,19 +1,12 @@
 part of 'study_plans_bloc.dart';
 
-abstract class StudyPlansState extends Equatable {
+abstract class StudyPlansState {
   const StudyPlansState();
 }
 
-class StudyPlansEmpty extends StudyPlansState {
-  @override
-  List<Object> get props => throw UnimplementedError();
+class StudyPlansEmpty extends StudyPlansState {}
 
-}
-
-class StudyPlansLoading extends StudyPlansState {
-  @override
-  List<Object> get props => throw UnimplementedError();
-}
+class StudyPlansLoading extends StudyPlansState {}
 
 class StudyPlansLoaded extends StudyPlansState {
   final Stream<List<StudyPlan>> studyPlans;
