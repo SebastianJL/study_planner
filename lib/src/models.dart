@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 
 class StudyPlan {
@@ -7,17 +5,11 @@ class StudyPlan {
   DateTime examDate;
 
   StudyPlan({@required this.subject, @required this.examDate});
+
   StudyPlan.empty();
 
   String toString() {
-    return '<$subject ($examDate)>';
-  }
-
-  Future<bool> save() async {
-    // todo: add firebase backend.
-    print('saving study plan for $subject on $examDate using a web service');
-    return Future.delayed(
-        Duration(seconds: 2), () => [true, false][Random().nextInt(2)]);
+    return '<$subject>';
   }
 }
 
@@ -33,11 +25,4 @@ class LearningGoal {
     @required this.quantifier,
     @required this.studyPlan,
   });
-
-  Future<bool> save() async {
-    // todo: add firebase backend.
-    print('saving learning goal $name for $studyPlan using a web service');
-    return Future.delayed(
-        Duration(seconds: 2), () => [true, false][Random().nextInt(2)]);
-  }
 }
