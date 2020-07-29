@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:study_planer/src/blocs/study_plans_bloc.dart';
 import 'package:study_planer/src/models.dart';
 
 class AddStudyPlanForm extends StatefulWidget {
+
   @override
   AddStudyPlanFormState createState() {
     return AddStudyPlanFormState();
@@ -16,12 +19,15 @@ class AddStudyPlanFormState extends State<AddStudyPlanForm> {
   // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
   StudyPlan _newStudyPlan = StudyPlan.empty();
+  Bloc bloc;
 
   @override
   Widget build(BuildContext context) {
+    bloc = BlocProvider.of<StudyPlansBloc>(context);
     return Form(
-        key: _formKey,
-        child: Column(children: <Widget>[
+      key: _formKey,
+      child: Column(
+        children: <Widget>[
           TextFormField(
             decoration: InputDecoration(
                 labelText: 'Subject', hintText: 'Math, biology, ...'),
@@ -39,31 +45,22 @@ class AddStudyPlanFormState extends State<AddStudyPlanForm> {
           InputDatePickerFormField(
             initialDate: DateTime.now(),
             firstDate: DateTime(2000),
-            lastDate: DateTime.now().add(Duration(days: 2*365)),
+            lastDate: DateTime.now().add(Duration(days: 2 * 365)),
             onDateSaved: (value) => _newStudyPlan.examDate = value,
           ),
           RaisedButton(
             onPressed: () async {
               final form = _formKey.currentState;
-              String response;
               if (form.validate()) {
                 form.save();
-                Scaffold.of(context)
-                    .showSnackBar(SnackBar(content: Text('Processing Data')));
-
-                _newStudyPlan.save().then((successful) {
-                  if (successful) {
-                    response = 'Saved $_newStudyPlan.';
-                  } else {
-                    response = 'Failed to save $_newStudyPlan.';
-                  }
-                  Scaffold.of(context)
-                      .showSnackBar(SnackBar(content: Text(response)));
-                });
+                Navigator.of(context).pop();
+                bloc.add(AddStudyPlan(_newStudyPlan));
               }
             },
             child: Text('Create study plan.'),
           )
-        ]));
+        ],
+      ),
+    );
   }
 }

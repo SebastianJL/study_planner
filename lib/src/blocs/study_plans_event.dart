@@ -5,3 +5,9 @@ abstract class StudyPlansEvent {
 }
 
 class GetStudyPlans extends StudyPlansEvent {}
+
+class AddStudyPlan extends StudyPlansEvent {
+  final StudyPlan studyPlan;
+
+  AddStudyPlan(this.studyPlan);
+}

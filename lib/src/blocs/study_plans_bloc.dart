@@ -9,11 +9,7 @@ part 'study_plans_event.dart';
 part 'study_plans_state.dart';
 
 class StudyPlansBloc extends Bloc<StudyPlansEvent, StudyPlansState> {
-  var _studyPlans = [
-    StudyPlan(examDate: DateTime.now(), subject: 'Maths'),
-    StudyPlan(examDate: DateTime.now(), subject: 'Biology'),
-//    StudyPlan(examDate: DateTime.now(), subject: 'Geography'),
-  ];
+  var _studyPlans = [];
 
   StudyPlansBloc() : super(StudyPlansEmpty()) {
     this.add(GetStudyPlans());
@@ -33,6 +29,9 @@ class StudyPlansBloc extends Bloc<StudyPlansEvent, StudyPlansState> {
               Duration(seconds: 1), (_) => _studyPlans),
         );
       }
+    } else if (event is AddStudyPlan) {
+      _studyPlans.add(event.studyPlan);
+      yield StudyPlanAdded(event.studyPlan, true);
     }
   }
 }

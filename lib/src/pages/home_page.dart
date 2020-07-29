@@ -20,18 +20,30 @@ class HomePage extends StatelessWidget {
       ),
       body: Container(
         padding: EdgeInsets.all(8),
-        child: BlocBuilder<StudyPlansBloc, StudyPlansState>(
-          builder: (context, state) {
-            if (state is StudyPlansEmpty) {
-              return _buildEmpty();
-            } else if (state is StudyPlansLoading) {
-              return _buildLoading();
-            } else if (state is StudyPlansLoaded) {
-              return _buildStudyPlanListView(state.studyPlans);
-            } else {
-              return _buildErrorNoSuchState(state);
+        child: BlocListener<StudyPlansBloc, StudyPlansState>(
+          listener: (context, state) {
+            if (state is StudyPlanAdded) {
+              String message = state.successful
+                  ? 'New study plan ${state.studyPlan} created.'
+                  : "Error: study plan ${state.studyPlan} couldn't be created.";
+              Scaffold.of(context).showSnackBar(
+                  SnackBar(content: Text(message)));
             }
           },
+          child: BlocBuilder<StudyPlansBloc, StudyPlansState>(
+            buildWhen: (previous, current) => !(current is StudyPlanAdded),
+            builder: (context, state) {
+              if (state is StudyPlansEmpty) {
+                return _buildEmpty();
+              } else if (state is StudyPlansLoading) {
+                return _buildLoading();
+              } else if (state is StudyPlansLoaded) {
+                return _buildStudyPlanListView(state.studyPlans);
+              } else {
+                return _buildErrorNoSuchState(state);
+              }
+            },
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(

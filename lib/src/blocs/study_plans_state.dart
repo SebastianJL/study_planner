@@ -12,8 +12,11 @@ class StudyPlansLoaded extends StudyPlansState {
   final Stream<List<StudyPlan>> studyPlans;
 
   StudyPlansLoaded({@required this.studyPlans});
+}
 
-  @override
-  List<Object> get props => throw UnimplementedError();
+class StudyPlanAdded extends StudyPlansState {
+  final StudyPlan studyPlan;
+  final bool successful;
 
+  StudyPlanAdded(this.studyPlan, this.successful);
 }
