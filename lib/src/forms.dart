@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:study_planer/src/blocs/study_plans_bloc.dart';
+import 'package:study_planer/src/blocs/study_plan_cubit.dart';
 import 'package:study_planer/src/models.dart';
 
 class AddStudyPlanForm extends StatefulWidget {
@@ -19,11 +19,11 @@ class AddStudyPlanFormState extends State<AddStudyPlanForm> {
   // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
   StudyPlan _newStudyPlan = StudyPlan.empty();
-  Bloc bloc;
+  StudyPlanCubit cubit;
 
   @override
   Widget build(BuildContext context) {
-    bloc = BlocProvider.of<StudyPlansBloc>(context);
+    cubit = BlocProvider.of<StudyPlanCubit>(context);
     return Form(
       key: _formKey,
       child: Column(
@@ -54,7 +54,7 @@ class AddStudyPlanFormState extends State<AddStudyPlanForm> {
               if (form.validate()) {
                 form.save();
                 Navigator.of(context).pop();
-                bloc.add(AddStudyPlan(_newStudyPlan));
+                cubit.addStudyPlan(_newStudyPlan);
               }
             },
             child: Text('Create study plan.'),
