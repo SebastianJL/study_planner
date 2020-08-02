@@ -1,6 +1,6 @@
 {
   "project_info": {
-    "project_number": "231922061447",
+    "project_number": "450478568653",
     "firebase_url": "https://study-planner-app-db.firebaseio.com",
     "project_id": "study-planner-app-db",
     "storage_bucket": "study-planner-app-db.appspot.com"
@@ -8,27 +8,27 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:231922061447:android:f0ee9d2387f858a6c06822",
+        "mobilesdk_app_id": "1:450478568653:android:64462b59c485d8f19c6584",
         "android_client_info": {
           "package_name": "ch.example.study_planner"
         }
       },
       "oauth_client": [
         {
-          "client_id": "231922061447-t7rtijinng97gtl12ldonb51l4vpc1b8.apps.googleusercontent.com",
+          "client_id": "450478568653-00ngnom0hhtolbfhubfuk2lvf4dfcalg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBlnOduRjjQs-PlAahs3rJP_4AKRm5hR5w"
+          "current_key": "AIzaSyD_Cm62ricTKa1_RS5HxYydfKRt3NG41XM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "231922061447-t7rtijinng97gtl12ldonb51l4vpc1b8.apps.googleusercontent.com",
+              "client_id": "450478568653-00ngnom0hhtolbfhubfuk2lvf4dfcalg.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
