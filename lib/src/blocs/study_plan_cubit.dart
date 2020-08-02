@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:study_planer/src/models.dart';
+import 'package:study_planner/src/models.dart';
 
 part 'study_plan_state.dart';
 

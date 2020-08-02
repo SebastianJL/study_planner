@@ -1,4 +1,4 @@
-# study_planer
+# study_planner
 
 Plan your studies for your next exam.
 

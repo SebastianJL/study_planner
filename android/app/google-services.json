@@ -1,16 +1,16 @@
 {
   "project_info": {
     "project_number": "231922061447",
-    "firebase_url": "https://study-planer-app-db.firebaseio.com",
-    "project_id": "study-planer-app-db",
-    "storage_bucket": "study-planer-app-db.appspot.com"
+    "firebase_url": "https://study-planner-app-db.firebaseio.com",
+    "project_id": "study-planner-app-db",
+    "storage_bucket": "study-planner-app-db.appspot.com"
   },
   "client": [
     {
       "client_info": {
         "mobilesdk_app_id": "1:231922061447:android:f0ee9d2387f858a6c06822",
         "android_client_info": {
-          "package_name": "ch.example.study_planer"
+          "package_name": "ch.example.study_planner"
         }
       },
       "oauth_client": [

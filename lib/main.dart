@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:study_planer/src/blocs/study_plan_cubit.dart';
-import 'package:study_planer/src/route_generator.dart';
+import 'package:study_planner/src/blocs/study_plan_cubit.dart';
+import 'package:study_planner/src/route_generator.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (BuildContext _) => StudyPlanCubit(),
       child: MaterialApp(
-        title: 'StudyPlaner',
+        title: 'StudyPlanner',
         theme: ThemeData(
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,

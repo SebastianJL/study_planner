@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:study_planer/src/pages/add_study_plan_page.dart';
-import 'package:study_planer/src/pages/home_page.dart';
+import 'package:study_planner/src/pages/add_study_plan_page.dart';
+import 'package:study_planner/src/pages/home_page.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {

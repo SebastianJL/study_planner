@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:study_planer/src/forms.dart';
+import 'package:study_planner/src/forms.dart';
 
 class AddStudyPlanPage extends StatelessWidget {
   @override

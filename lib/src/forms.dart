@@ -2,8 +2,8 @@ import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:study_planer/src/blocs/study_plan_cubit.dart';
-import 'package:study_planer/src/models.dart';
+import 'package:study_planner/src/blocs/study_plan_cubit.dart';
+import 'package:study_planner/src/models.dart';
 
 class AddStudyPlanForm extends StatefulWidget {
   @override

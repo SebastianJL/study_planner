@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:study_planer/src/blocs/study_plan_cubit.dart';
-import 'package:study_planer/src/models.dart';
+import 'package:study_planner/src/blocs/study_plan_cubit.dart';
+import 'package:study_planner/src/models.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key key}) : super(key: key);
 
-  final String title = 'Study planer';
+  final String title = 'Study planner';
 
   @override
   Widget build(BuildContext context) {
