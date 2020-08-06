@@ -8,6 +8,15 @@ class StudyPlan {
 
   StudyPlan.empty();
 
+  StudyPlan.fromJson(Map<String, dynamic> json)
+      : subject = json['subject'],
+        examDate = json['examDate'];
+
+  Map<String, dynamic> toJson() => {
+        'subject': subject,
+        'examDate': examDate,
+      };
+
   String toString() {
     return '<$subject>';
   }
