@@ -25,7 +25,7 @@ Map<String, dynamic> _$StudyPlanToJson(StudyPlan instance) => <String, dynamic>{
 LearningGoal _$LearningGoalFromJson(Map<String, dynamic> json) {
   return LearningGoal(
     description: json['description'] as String,
-    quantity: json['quantity'] as int,
+    quantity: LearningGoal._intFromString(json['quantity']),
     quantifier: json['quantifier'] as String,
   );
 }
@@ -33,6 +33,6 @@ LearningGoal _$LearningGoalFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$LearningGoalToJson(LearningGoal instance) =>
     <String, dynamic>{
       'description': instance.description,
-      'quantity': instance.quantity,
+      'quantity': LearningGoal._intToString(instance.quantity),
       'quantifier': instance.quantifier,
     };
