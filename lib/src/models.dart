@@ -1,37 +1,40 @@
 import 'package:flutter/cupertino.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'models.g.dart';
+
+@JsonSerializable(nullable: false)
 class StudyPlan {
   String subject;
   DateTime examDate;
 
-  StudyPlan({@required this.subject, @required this.examDate});
+  List<LearningGoal> learningGoals;
 
-  StudyPlan.empty();
+  StudyPlan(
+      {@required this.subject,
+      @required this.examDate,
+      @required this.learningGoals});
 
-  StudyPlan.fromJson(Map<String, dynamic> json)
-      : subject = json['subject'],
-        examDate = json['examDate'];
-
-  Map<String, dynamic> toJson() => {
-        'subject': subject,
-        'examDate': examDate,
-      };
+  factory StudyPlan.fromJson(Map<String, dynamic> json) =>
+      _$StudyPlanFromJson(json);
 
   String toString() {
     return '<$subject>';
   }
 }
 
+@JsonSerializable(nullable: false)
 class LearningGoal {
-  String name;
+  String description;
   int quantity;
   String quantifier;
-  StudyPlan studyPlan;
 
   LearningGoal({
-    @required this.name,
+    @required this.description,
     @required this.quantity,
     @required this.quantifier,
-    @required this.studyPlan,
   });
+
+  factory LearningGoal.fromJson(Map<String, dynamic> json) =>
+      _$LearningGoalFromJson(json);
 }
