@@ -18,11 +18,17 @@ class AddStudyPlanPage extends StatelessWidget {
             resizeToAvoidBottomInset: false,
             appBar: AppBar(
               actions: <Widget>[
-                GestureDetector(
-                  onTap: () => formBloc.submit(),
-                  child: Container(
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.only(right: 20),
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: RaisedButton(
+                      padding: EdgeInsets.all(8),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18),
+                      ),
+                      textColor: Theme.of(context).colorScheme.primary,
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      elevation: 0,
+                      onPressed: () => formBloc.submit(),
                       child: Text('Create study plan')),
                 ),
               ],
