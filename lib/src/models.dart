@@ -1,12 +1,20 @@
 import 'package:flutter/cupertino.dart';
+import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'models.g.dart';
 
+@HiveType(typeId: 0)
 @JsonSerializable(nullable: false)
 class StudyPlan {
+
+  @HiveField(0)
   String subject;
+
+  @HiveField(1)
   DateTime examDate;
+
+  @HiveField(2)
   List<LearningGoal> learningGoals;
 
   StudyPlan(
@@ -25,11 +33,17 @@ class StudyPlan {
   }
 }
 
+@HiveType(typeId: 1)
 @JsonSerializable(nullable: false)
 class LearningGoal {
+  @HiveField(0)
   String description;
+
+  @HiveField(1)
   @JsonKey(fromJson: _intFromString, toJson: _intToString)
   int quantity;
+
+  @HiveField(2)
   String quantifier;
 
   LearningGoal({
