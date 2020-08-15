@@ -43,13 +43,14 @@ class StudyPlanCubit extends Cubit<StudyPlanState> {
 
   Stream<List<StudyPlan>> get studyPlans => _controller.stream;
 
-  addStudyPlan(StudyPlan studyPlan) {
+  void addStudyPlan(StudyPlan studyPlan) {
     _box.add(studyPlan);
     emit(StudyPlanAdded(studyPlan, true));
   }
 
-  removeStudyPlan(StudyPlan studyPlan) {
-//  todo(SebastianJL): delete studyplan
+  Future<void> removeStudyPlan(int index, StudyPlan studyPlan) async {
+    assert(_box.getAt(index) == studyPlan);
+    await _box.deleteAt(index);
     emit(StudyPlanRemoved(studyPlan));
   }
 

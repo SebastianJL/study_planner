@@ -31,9 +31,7 @@ class HomePage extends StatelessWidget {
             }
           },
           child: StreamBuilder(
-            stream: BlocProvider
-                .of<StudyPlanCubit>(context)
-                .studyPlans,
+            stream: BlocProvider.of<StudyPlanCubit>(context).studyPlans,
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
                 if (snapshot.data.isEmpty) {
@@ -81,15 +79,39 @@ class StudyPlanListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       itemCount: data.length,
-      separatorBuilder: (context, index) =>
-          Divider(
-            color: Colors.black,
-          ),
+      separatorBuilder: (context, index) => Divider(
+        color: Colors.black,
+      ),
       itemBuilder: (BuildContext context, int index) {
         var studyPlan = data[index];
-        return ListTile(
-          title: Text('${studyPlan.subject}'),
-          subtitle: Text('exam date: ${studyPlan.examDate}'),
+        return Dismissible(
+          key: Key('StudyPlan $index'),
+          background: Container(color: Colors.red),
+          confirmDismiss: (direction) => showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (context) {
+                var nav = Navigator.of(context);
+                return AlertDialog(
+                  title: Text('Delete $studyPlan?'),
+                  actions: [
+                    FlatButton(
+                      child: Text('No'),
+                      onPressed: () => nav.pop(false),
+                    ),
+                    FlatButton(
+                      child: Text('Yes'),
+                      onPressed: () => nav.pop(true),
+                    ),
+                  ],
+                );
+              }),
+          onDismissed: (direction) => BlocProvider.of<StudyPlanCubit>(context)
+              .removeStudyPlan(index, studyPlan),
+          child: ListTile(
+            title: Text('${studyPlan.subject}'),
+            subtitle: Text('exam date: ${studyPlan.examDate}'),
+          ),
         );
       },
     );
