@@ -24,7 +24,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-  flutter_launcher_icons: ^0.7.3
   bloc: ^6.0.0
   flutter_bloc: ^6.0.1
   equatable: ^1.2.3
@@ -39,6 +38,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.7.3
   build_runner: ^1.10.0
   json_serializable:  ^3.3.0
   hive_generator: ^0.7.1
