@@ -28,8 +28,13 @@ class HomePage extends StatelessWidget {
             } else if (state is AddStudyPlanFailed) {
               message =
                   "Error: study plan ${state.studyPlan} couldn't be created.";
+            } else if (state is StudyPlanRemoved) {
+              message = 'Study plan ${state.studyPlan} deleted.';
             }
-            Scaffold.of(context).showSnackBar(SnackBar(content: Text(message)));
+            if (message != null) {
+              Scaffold.of(context)
+                  .showSnackBar(SnackBar(content: Text(message)));
+            }
           },
           child: StreamBuilder(
             stream: BlocProvider.of<StudyPlanCubit>(context).studyPlans,
