@@ -12,6 +12,7 @@ class AddStudyPlanPage extends StatelessWidget {
           StudyPlanFormBloc(BlocProvider.of<StudyPlanCubit>(context)),
       child: Builder(
         builder: (context) {
+          // ignore: close_sinks
           final formBloc = context.bloc<StudyPlanFormBloc>();
 
           return Scaffold(
