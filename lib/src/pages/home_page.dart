@@ -19,7 +19,6 @@ class HomePage extends StatelessWidget {
         title: Text(title),
       ),
       body: Container(
-        padding: EdgeInsets.all(8),
         child: BlocListener<StudyPlanCubit, StudyPlanState>(
           listener: (context, state) {
             String message;
@@ -83,11 +82,8 @@ class StudyPlanListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
+    return ListView.builder(
       itemCount: data.length,
-      separatorBuilder: (context, index) => Divider(
-        color: Colors.black,
-      ),
       itemBuilder: (BuildContext context, int index) {
         var studyPlan = data[index];
         return Dismissible(
@@ -142,6 +138,13 @@ class StudyPlanListView extends StatelessWidget {
           onDismissed: (direction) => BlocProvider.of<StudyPlanCubit>(context)
               .removeStudyPlan(index, studyPlan),
           child: ListTile(
+            leading: CircleAvatar(
+              backgroundColor:
+                  Theme.of(context).colorScheme.primary.withAlpha(150),
+              foregroundColor:
+                  Theme.of(context).colorScheme.onPrimary,
+              child: Text(studyPlan.subject[0]),
+            ),
             title: Text('${studyPlan.subject}'),
             subtitle: Text('exam date: ${studyPlan.examDate}'),
           ),
