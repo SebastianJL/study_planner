@@ -47,7 +47,7 @@ dev_dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/icon/icon-round.png"
+  image_path: "assets/icon/icon-round-inverted.png"
 
 # The following section is specific to Flutter.
 flutter:
