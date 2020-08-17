@@ -92,7 +92,20 @@ class StudyPlanListView extends StatelessWidget {
         var studyPlan = data[index];
         return Dismissible(
           key: Key('StudyPlan $index'),
-          background: Container(color: Colors.red),
+          background: Container(
+            color: Colors.red,
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Icon(
+                  Icons.delete,
+                  color: Colors.white,
+                  size: 30,
+                ),
+              ),
+            ),
+          ),
           confirmDismiss: (direction) => showDialog(
               context: context,
               barrierDismissible: false,
