@@ -11,22 +11,9 @@ import 'package:study_planner/src/models.dart';
 part 'study_plan_state.dart';
 
 class StudyPlanCubit extends Cubit<StudyPlanState> {
-  static final String boxName = 'StudyPlans';
-  static bool _isInitialized = false;
+  final Box _box;
 
-  Box _box;
-
-  /// This method must be called before an instance can be created.
-  static Future<void> init() async {
-    Hive.registerAdapter(StudyPlanAdapter());
-    Hive.registerAdapter(LearningGoalAdapter());
-    await Hive.openBox<StudyPlan>(boxName);
-    _isInitialized = true;
-  }
-
-  StudyPlanCubit() : super(StudyPlanInitial()) {
-    assert(_isInitialized);
-    _box = Hive.box<StudyPlan>(boxName);
+  StudyPlanCubit(this._box) : super(StudyPlanInitial()) {
     _connectStreams();
     _controller.sink.add(_studyPlans);
   }
