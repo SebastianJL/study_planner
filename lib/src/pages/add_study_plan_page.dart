@@ -22,7 +22,7 @@ class AddStudyPlanPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: RaisedButton(
-                      padding: EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18),
                       ),
@@ -90,7 +90,7 @@ class AddStudyPlanPage extends StatelessWidget {
                       },
                     ),
                     RaisedButton(
-                      padding: EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8),
                       child: Text('Add learning goal'),
                       onPressed: () => formBloc.addLearningGoal(),
                     )
@@ -126,7 +126,7 @@ class LoadingDialog extends StatelessWidget {
           child: Container(
             width: 80,
             height: 80,
-            padding: EdgeInsets.all(12.0),
+            padding: const EdgeInsets.all(12.0),
             child: CircularProgressIndicator(),
           ),
         ),

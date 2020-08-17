@@ -97,13 +97,13 @@ class StudyPlanListView extends StatelessWidget {
                 child: Icon(
                   Icons.edit,
                   color: Colors.white,
-                  size: 30,
+                  size: 27,
                 ),
               ),
             ),
           ),
           secondaryBackground: Container(
-            color: Colors.red,
+            color: Colors.amber,
             child: Align(
               alignment: Alignment.centerRight,
               child: Padding(
@@ -111,7 +111,7 @@ class StudyPlanListView extends StatelessWidget {
                 child: Icon(
                   Icons.delete,
                   color: Colors.white,
-                  size: 30,
+                  size: 27,
                 ),
               ),
             ),
