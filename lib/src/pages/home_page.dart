@@ -93,6 +93,20 @@ class StudyPlanListView extends StatelessWidget {
         return Dismissible(
           key: Key('StudyPlan $index'),
           background: Container(
+            color: Colors.blue,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Icon(
+                  Icons.edit,
+                  color: Colors.white,
+                  size: 30,
+                ),
+              ),
+            ),
+          ),
+          secondaryBackground: Container(
             color: Colors.red,
             child: Align(
               alignment: Alignment.centerRight,
