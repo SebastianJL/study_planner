@@ -22,13 +22,14 @@ class HomePage extends StatelessWidget {
         padding: EdgeInsets.all(8),
         child: BlocListener<StudyPlanCubit, StudyPlanState>(
           listener: (context, state) {
+            String message;
             if (state is StudyPlanAdded) {
-              String message = state.successful
-                  ? 'New study plan ${state.studyPlan} created.'
-                  : "Error: study plan ${state.studyPlan} couldn't be created.";
-              Scaffold.of(context)
-                  .showSnackBar(SnackBar(content: Text(message)));
+              message = 'New study plan ${state.studyPlan} created.';
+            } else if (state is AddStudyPlanFailed) {
+              message =
+                  "Error: study plan ${state.studyPlan} couldn't be created.";
             }
+            Scaffold.of(context).showSnackBar(SnackBar(content: Text(message)));
           },
           child: StreamBuilder(
             stream: BlocProvider.of<StudyPlanCubit>(context).studyPlans,

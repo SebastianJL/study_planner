@@ -10,9 +10,17 @@ class StudyPlanInitial extends StudyPlanState {
 
 class StudyPlanAdded extends StudyPlanState {
   final StudyPlan studyPlan;
-  final bool successful;
 
-  StudyPlanAdded(this.studyPlan, this.successful);
+  StudyPlanAdded(this.studyPlan);
+
+  @override
+  List<Object> get props => [studyPlan];
+}
+
+class AddStudyPlanFailed extends StudyPlanState {
+  final StudyPlan studyPlan;
+
+  AddStudyPlanFailed(this.studyPlan);
 
   @override
   List<Object> get props => [studyPlan];
