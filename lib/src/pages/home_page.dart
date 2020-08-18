@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:study_planner/presentation/custom_icons.dart';
 import 'package:study_planner/src/blocs/study_plan_cubit.dart';
 import 'package:study_planner/src/models.dart';
 
@@ -12,10 +13,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Image.asset('assets/icon/icon-white.png'),
-        ),
+        leading: Icon(CustomIcons.app_icon, color: Theme.of(context).colorScheme.onPrimary,),
         title: Text(title),
       ),
       body: Container(
@@ -141,8 +139,7 @@ class StudyPlanListView extends StatelessWidget {
             leading: CircleAvatar(
               backgroundColor:
                   Theme.of(context).colorScheme.primary.withAlpha(150),
-              foregroundColor:
-                  Theme.of(context).colorScheme.onPrimary,
+              foregroundColor: Theme.of(context).colorScheme.onPrimary,
               child: Text(studyPlan.subject[0]),
             ),
             title: Text('${studyPlan.subject}'),
