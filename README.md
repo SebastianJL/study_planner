@@ -1,6 +1,6 @@
 # study_planner
 
-Plan your studies for your next exam.
+Plan your studies.
 
 ## Getting Started
 
