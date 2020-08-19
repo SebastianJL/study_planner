@@ -13,7 +13,7 @@ class AddStudyPlanPage extends StatelessWidget {
       child: Builder(
         builder: (context) {
           // ignore: close_sinks
-          final formBloc = context.bloc<StudyPlanFormBloc>();
+          final formBloc = BlocProvider.of<StudyPlanFormBloc>(context);
 
           return Scaffold(
             resizeToAvoidBottomInset: false,
