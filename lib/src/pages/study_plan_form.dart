@@ -3,13 +3,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:study_planner/src/blocs/study_plan_cubit.dart';
 import 'package:study_planner/src/blocs/study_plan_form_bloc.dart';
+import 'package:study_planner/src/models.dart';
 
-class AddStudyPlanPage extends StatelessWidget {
+class StudyPlanForm extends StatelessWidget {
+  final StudyPlan studyPlan;
+
+  const StudyPlanForm({Key key, this.studyPlan}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          StudyPlanFormBloc(BlocProvider.of<StudyPlanCubit>(context)),
+      create: (context) => StudyPlanFormBloc(
+          cubit: BlocProvider.of<StudyPlanCubit>(context),
+          json: studyPlan?.toJson()),
       child: Builder(
         builder: (context) {
           // ignore: close_sinks
@@ -48,59 +54,92 @@ class AddStudyPlanPage extends StatelessWidget {
                 Scaffold.of(context).showSnackBar(
                     SnackBar(content: Text(state.failureResponse)));
               },
-              child: SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    TextFieldBlocBuilder(
-                      textFieldBloc: formBloc.subject,
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.subject),
-                        labelText: 'Subject',
-                        hintText: 'Maths, biology, ...',
-                      ),
-                    ),
-                    DateTimeFieldBlocBuilder(
-                      dateTimeFieldBloc: formBloc.examDate,
-                      format: DateFormat('dd-mm-yyyy'),
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(1900),
-                      lastDate: DateTime(2100),
-                      decoration: InputDecoration(
-                        labelText: 'Exam date',
-                        prefixIcon: Icon(Icons.calendar_today),
-                      ),
-                    ),
-                    BlocBuilder(
-                      cubit: formBloc.learningGoals,
-                      builder: (context, state) {
-                        if (state.fieldBlocs.isNotEmpty) {
-                          return ListView.builder(
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: state.fieldBlocs.length,
-                            itemBuilder: (context, index) => LearningGoalCard(
-                              memberIndex: index,
-                              learningGoalField: state.fieldBlocs[index],
-                              onRemoveLearningGoal: () =>
-                                  formBloc.removeLearningGoal(index),
-                            ),
-                          );
-                        }
-                        return Container();
-                      },
-                    ),
-                    RaisedButton(
-                      padding: const EdgeInsets.all(8),
-                      child: Text('Add learning goal'),
-                      onPressed: () => formBloc.addLearningGoal(),
-                    )
-                  ],
-                ),
+              child: BlocBuilder<StudyPlanFormBloc, FormBlocState>(
+                builder: (context, state) {
+                  if (state is FormBlocLoading) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state is FormBlocLoadFailed) {
+                    return Center(
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text('Loading failed:'),
+                            Text('${state.failureResponse ?? 'no message'}')
+                          ]),
+                    );
+                  } else {
+                    return _FormBody(formBloc: formBloc);
+                  }
+                },
               ),
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class _FormBody extends StatelessWidget {
+  const _FormBody({
+    Key key,
+    @required this.formBloc,
+  }) : super(key: key);
+
+  final StudyPlanFormBloc formBloc;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          TextFieldBlocBuilder(
+            textFieldBloc: formBloc.subject,
+            keyboardType: TextInputType.text,
+            decoration: InputDecoration(
+              prefixIcon: Icon(Icons.subject),
+              labelText: 'Subject',
+              hintText: 'Maths, biology, ...',
+            ),
+          ),
+          DateTimeFieldBlocBuilder(
+            dateTimeFieldBloc: formBloc.examDate,
+            format: DateFormat('dd-mm-yyyy'),
+            initialDate: DateTime.now(),
+            firstDate: DateTime(1900),
+            lastDate: DateTime(2100),
+            decoration: InputDecoration(
+              labelText: 'Exam date',
+              prefixIcon: Icon(Icons.calendar_today),
+            ),
+          ),
+          BlocBuilder(
+            cubit: formBloc.learningGoals,
+            builder: (context, state) {
+              if (state.fieldBlocs.isNotEmpty) {
+                return ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: state.fieldBlocs.length,
+                  itemBuilder: (context, index) => _LearningGoalCard(
+                    memberIndex: index,
+                    learningGoalField: state.fieldBlocs[index],
+                    onRemoveLearningGoal: () =>
+                        formBloc.removeLearningGoal(index),
+                  ),
+                );
+              }
+              return Container();
+            },
+          ),
+          RaisedButton(
+            padding: const EdgeInsets.all(8),
+            child: Text('Add learning goal'),
+            onPressed: () => formBloc.addLearningGoal(),
+          )
+        ],
       ),
     );
   }
@@ -136,13 +175,13 @@ class LoadingDialog extends StatelessWidget {
   }
 }
 
-class LearningGoalCard extends StatelessWidget {
+class _LearningGoalCard extends StatelessWidget {
   final int memberIndex;
   final LearningGoalFieldBloc learningGoalField;
 
   final VoidCallback onRemoveLearningGoal;
 
-  const LearningGoalCard({
+  const _LearningGoalCard({
     Key key,
     @required this.memberIndex,
     @required this.learningGoalField,

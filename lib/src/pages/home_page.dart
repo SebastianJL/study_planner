@@ -13,7 +13,10 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(CustomIcons.app_icon, color: Theme.of(context).colorScheme.onPrimary,),
+        leading: Icon(
+          CustomIcons.app_icon,
+          color: Theme.of(context).colorScheme.onPrimary,
+        ),
         title: Text(title),
       ),
       body: Container(
@@ -114,25 +117,15 @@ class StudyPlanListView extends StatelessWidget {
               ),
             ),
           ),
-          confirmDismiss: (direction) => showDialog(
-              context: context,
-              barrierDismissible: false,
-              builder: (context) {
-                var nav = Navigator.of(context);
-                return AlertDialog(
-                  title: Text('Delete $studyPlan?'),
-                  actions: [
-                    FlatButton(
-                      child: Text('No'),
-                      onPressed: () => nav.pop(false),
-                    ),
-                    FlatButton(
-                      child: Text('Yes'),
-                      onPressed: () => nav.pop(true),
-                    ),
-                  ],
-                );
-              }),
+          confirmDismiss: (direction) {
+            if (direction == DismissDirection.endToStart) {
+              return _showDeleteDialog(context, studyPlan);
+            } else {
+              Navigator.of(context)
+                  .pushNamed('/forms/AddStudyPlanPage', arguments: studyPlan);
+              return Future.value(false);
+            }
+          },
           onDismissed: (direction) => BlocProvider.of<StudyPlanCubit>(context)
               .removeStudyPlan(index, studyPlan),
           child: ListTile(
@@ -148,5 +141,27 @@ class StudyPlanListView extends StatelessWidget {
         );
       },
     );
+  }
+
+  Future<bool> _showDeleteDialog(BuildContext context, StudyPlan studyPlan) {
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          var nav = Navigator.of(context);
+          return AlertDialog(
+            title: Text('Delete $studyPlan?'),
+            actions: [
+              FlatButton(
+                child: Text('No'),
+                onPressed: () => nav.pop(false),
+              ),
+              FlatButton(
+                child: Text('Yes'),
+                onPressed: () => nav.pop(true),
+              ),
+            ],
+          );
+        });
   }
 }

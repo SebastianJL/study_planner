@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:study_planner/src/pages/add_study_plan_page.dart';
+import 'package:study_planner/src/models.dart';
+import 'package:study_planner/src/pages/study_plan_form.dart';
 import 'package:study_planner/src/pages/home_page.dart';
 
 class RouteGenerator {
@@ -14,7 +15,11 @@ class RouteGenerator {
         // Validation of correct data type
         if (args == null) {
           return MaterialPageRoute(
-            builder: (_) => AddStudyPlanPage(),
+            builder: (_) => StudyPlanForm(),
+          );
+        } else if (args is StudyPlan) {
+          return MaterialPageRoute(
+            builder: (_) => StudyPlanForm(studyPlan: args),
           );
         }
         return _errorRoute(settings.name);

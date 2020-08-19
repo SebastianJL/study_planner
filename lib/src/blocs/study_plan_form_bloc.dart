@@ -6,6 +6,7 @@ import 'package:study_planner/src/models.dart';
 
 class StudyPlanFormBloc extends FormBloc<String, String> {
   final StudyPlanCubit cubit;
+  final Map<String, dynamic> json;
 
   // ignore: close_sinks
   final subject = TextFieldBloc(
@@ -29,7 +30,7 @@ class StudyPlanFormBloc extends FormBloc<String, String> {
     name: 'learningGoals',
   );
 
-  StudyPlanFormBloc(this.cubit) {
+  StudyPlanFormBloc({this.cubit, this.json}) : super(isLoading: true) {
     addFieldBlocs(
       fieldBlocs: [
         subject,
@@ -37,6 +38,19 @@ class StudyPlanFormBloc extends FormBloc<String, String> {
         learningGoals,
       ],
     );
+  }
+
+  @override
+  void onLoading() {
+    if (json != null) {
+      try {
+        subject.updateInitialValue(json['subject']);
+        examDate.updateInitialValue(DateTime.parse(json['examDate']));
+      } catch (e) {
+        return emitLoadFailed(failureResponse: e.toString());
+      }
+    }
+    emitLoaded();
   }
 
   @override
