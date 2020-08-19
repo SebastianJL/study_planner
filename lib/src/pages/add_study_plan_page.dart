@@ -18,6 +18,7 @@ class AddStudyPlanPage extends StatelessWidget {
           return Scaffold(
             resizeToAvoidBottomInset: false,
             appBar: AppBar(
+              leading: CloseButton(),
               actions: <Widget>[
                 Padding(
                   padding: const EdgeInsets.all(12.0),
