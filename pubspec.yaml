@@ -43,11 +43,16 @@ dev_dependencies:
   json_serializable:  ^3.3.0
   hive_generator: ^0.7.1
   uuid: ^2.2.0
+  flutter_native_splash: ^0.1.9
 
 flutter_icons:
   android: true
   ios: true
   image_path: "assets/icon/launcher-icon.png"
+
+flutter_native_splash:
+  image: assets/icon/app-icon.png
+  color: "#fe3521"
 
 # The following section is specific to Flutter.
 flutter:
