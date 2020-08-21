@@ -88,7 +88,7 @@ class StudyPlanListView extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         var studyPlan = data[index];
         return Dismissible(
-          key: Key('StudyPlan $index'),
+          key: UniqueKey(),
           background: Container(
             color: Colors.blue,
             child: Align(
