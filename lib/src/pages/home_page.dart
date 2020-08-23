@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:study_planner/main.dart';
 import 'package:study_planner/presentation/custom_icons.dart';
 import 'package:study_planner/src/blocs/study_plan_cubit.dart';
 import 'package:study_planner/src/models.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key key}) : super(key: key);
-
-  final String title = 'StudyPlanner';
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +16,17 @@ class HomePage extends StatelessWidget {
           CustomIcons.app_icon,
           color: Theme.of(context).colorScheme.onPrimary,
         ),
-        title: Text(title),
+        title: Text(appName),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.info_outline),
+            onPressed: () => showAboutDialog(
+              context: context,
+              applicationIcon: Icon(CustomIcons.app_icon),
+              applicationName: appName,
+            ),
+          )
+        ],
       ),
       body: Container(
         child: BlocListener<StudyPlanCubit, StudyPlanState>(

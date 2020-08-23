@@ -9,6 +9,8 @@ import 'package:study_planner/src/blocs/study_plan_cubit.dart';
 import 'package:study_planner/src/models.dart';
 import 'package:study_planner/src/route_generator.dart';
 
+const appName = 'StudyPlanner';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Directory appDocDir = await getApplicationDocumentsDirectory();
