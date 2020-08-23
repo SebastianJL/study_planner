@@ -7,7 +7,7 @@ import 'package:study_planner/src/models.dart';
 class HomePage extends StatelessWidget {
   HomePage({Key key}) : super(key: key);
 
-  final String title = 'Study planner';
+  final String title = 'StudyPlanner';
 
   @override
   Widget build(BuildContext context) {
