@@ -5,13 +5,21 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:logging/logging.dart';
 import 'package:meta/meta.dart';
 import 'package:study_planner/src/models.dart';
 
 part 'study_plan_state.dart';
 
 class StudyPlanCubit extends Cubit<StudyPlanState> {
+  static final log = Logger('StudyPlanCubit');
+
   final Box _box;
+  final _controller = StreamController<List<StudyPlan>>(
+    onListen: () {
+      log.info('Listened to studyPlan stream.');
+    },
+  );
 
   StudyPlanCubit(this._box) : super(StudyPlanInitial()) {
     _connectStreams();
@@ -23,8 +31,6 @@ class StudyPlanCubit extends Cubit<StudyPlanState> {
       _controller.sink.add(_studyPlans);
     });
   }
-
-  StreamController _controller = StreamController<List<StudyPlan>>();
 
   List<StudyPlan> get _studyPlans => _box.values.toList();
 
