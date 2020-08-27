@@ -10,61 +10,63 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<StudyPlanCubit, StudyPlanState>(
-      listener: (context, state) {
-        String message;
-        if (state is StudyPlanAdded) {
-          message = 'New study plan ${state.studyPlan} created.';
-        } else if (state is AddStudyPlanFailed) {
-          message = "Error: Study plan ${state.studyPlan} couldn't be created.";
-        } else if (state is StudyPlanRemoved) {
-          message = 'Study plan ${state.studyPlan} deleted.';
-        }
-        if (message != null) {
-          Scaffold.of(context).showSnackBar(SnackBar(content: Text(message)));
-        }
-      },
-      child: DefaultTabController(
-        length: 2,
-        child: Scaffold(
-          appBar: AppBar(
-            leading: Icon(
-              CustomIcons.app_icon,
-              color: Theme.of(context).colorScheme.onPrimary,
-            ),
-            title: Text(appName),
-            actions: [
-              IconButton(
-                icon: Icon(Icons.info_outline),
-                onPressed: () => showAboutDialog(
-                  context: context,
-                  applicationIcon: Icon(CustomIcons.app_icon),
-                  applicationName: appName,
-                ),
-              )
-            ],
-            bottom: TabBar(
-              tabs: [
-                Tab(text: 'Overview'),
-                Tab(text: 'Today'),
-              ],
-            ),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          leading: Icon(
+            CustomIcons.app_icon,
+            color: Theme.of(context).colorScheme.onPrimary,
           ),
-          body: TabBarView(children: [
+          title: Text(appName),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.info_outline),
+              onPressed: () => showAboutDialog(
+                context: context,
+                applicationIcon: Icon(CustomIcons.app_icon),
+                applicationName: appName,
+              ),
+            )
+          ],
+          bottom: TabBar(
+            tabs: [
+              Tab(text: 'Overview'),
+              Tab(text: 'Today'),
+            ],
+          ),
+        ),
+        body: BlocListener<StudyPlanCubit, StudyPlanState>(
+          listener: (context, state) {
+            String message;
+            if (state is StudyPlanAdded) {
+              message = 'New study plan ${state.studyPlan} created.';
+            } else if (state is AddStudyPlanFailed) {
+              message =
+                  "Error: Study plan ${state.studyPlan} couldn't be created.";
+            } else if (state is StudyPlanRemoved) {
+              message = 'Study plan ${state.studyPlan} deleted.';
+            }
+            if (message != null) {
+              Scaffold.of(context)
+                  .showSnackBar(SnackBar(content: Text(message)));
+            }
+          },
+          child: TabBarView(children: [
             OverviewTab(),
             Center(
               child: Icon(Icons.error, size: 150),
             )
           ]),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed(
-                '/forms/AddStudyPlanPage',
-              );
-            },
-            tooltip: 'Add study plan.',
-            child: Icon(Icons.add),
-          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.of(context).pushNamed(
+              '/forms/AddStudyPlanPage',
+            );
+          },
+          tooltip: 'Add study plan.',
+          child: Icon(Icons.add),
         ),
       ),
     );
