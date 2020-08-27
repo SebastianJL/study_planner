@@ -16,8 +16,7 @@ class HomePage extends StatelessWidget {
         if (state is StudyPlanAdded) {
           message = 'New study plan ${state.studyPlan} created.';
         } else if (state is AddStudyPlanFailed) {
-          message =
-          "Error: study plan ${state.studyPlan} couldn't be created.";
+          message = "Error: Study plan ${state.studyPlan} couldn't be created.";
         } else if (state is StudyPlanRemoved) {
           message = 'Study plan ${state.studyPlan} deleted.';
         }
@@ -54,7 +53,7 @@ class HomePage extends StatelessWidget {
           body: TabBarView(children: [
             OverviewTab(),
             Center(
-              child: Icon(Icons.error, size: 150,),
+              child: Icon(Icons.error, size: 150),
             )
           ]),
           floatingActionButton: FloatingActionButton(
@@ -72,32 +71,39 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class OverviewTab extends StatelessWidget {
+class OverviewTab extends StatefulWidget {
   const OverviewTab({
     Key key,
   }) : super(key: key);
 
   @override
+  _OverviewTabState createState() => _OverviewTabState();
+}
+
+class _OverviewTabState extends State<OverviewTab>
+    with AutomaticKeepAliveClientMixin<OverviewTab> {
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Container(
-        child: StreamBuilder(
-          stream: BlocProvider.of<StudyPlanCubit>(context).studyPlans,
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.hasData) {
-              if (snapshot.data.isEmpty) {
-                return _buildEmpty();
-              } else {
-                return _StudyPlanListView(snapshot.data);
-              }
-            } else if (snapshot.hasError) {
-              print(snapshot.error);
-              return _buildGenericError(snapshot.error);
-            } else {
+      child: StreamBuilder(
+        stream: BlocProvider.of<StudyPlanCubit>(context).studyPlans,
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.hasData) {
+            if (snapshot.data.isEmpty) {
               return _buildEmpty();
+            } else {
+              return _StudyPlanListView(snapshot.data);
             }
-          },
-        ),
-      );
+          } else if (snapshot.hasError) {
+            print(snapshot.error);
+            return _buildGenericError(snapshot.error);
+          } else {
+            return _buildEmpty();
+          }
+        },
+      ),
+    );
   }
 
   Widget _buildEmpty() {
@@ -107,6 +113,9 @@ class OverviewTab extends StatelessWidget {
   Widget _buildGenericError(Error error) {
     return Center(child: Text('Error: $error.'));
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 class _StudyPlanListView extends StatelessWidget {
